@@ -1,0 +1,235 @@
+[gd_scene load_steps=14 format=3 uid="uid://bquq5pd8mnp8y"]
+
+[ext_resource type="Script" path="res://CharacterBody3D.gd" id="1_x03fb"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l0a8v"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ifwni"]
+points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607, 0.498884, 0.169713, 0.559144, 0.464172, 0.231051, -0.803591, 0.320455, 0.40741, 0.651043, -0.243523, -0.482789, 0.594843, 0.0822132, -0.362868, -0.682312, 0.289697, 0.469044, -0.654529, -0.0662713, -0.127444, 0.842701, -0.338103, -0.393435, -0.683942, -0.244717, 0.438255, 0.623309, 0.200849, 0.0841477, 0.977454, 0.114795, -0.0682023, -0.976458, -0.12927, 0.20055, -0.563129, -0.451454, -0.185527, 0.595453, -0.453475, -0.273363, 0.592268, 0.407754, -0.00693649, -0.476823, 0.49966, 0.375821, -0.588614, 0.316955, 0.111579, 0.563059, -0.481177, -0.41725, 0.527866, -0.270497, -0.484546, -0.596972, -0.0665097, -0.279747, 0.908561, 0.0533361, -0.250197, -0.880712, 0.205319, 0.263647, -0.902771, -0.127394, 0.293368, 0.871526, -0.157196, 0.373412, -0.526319, -0.328246, 0.499663, 0.476641, -0.00688856, 0.0531056, 0.875001, 0.324703, -0.154543, -0.590854, 0.465879, -0.0972799, -0.782358, -0.398188, -0.387649, -0.498171, 0.31565, -0.30068, -0.587995, -0.388901)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xflxs"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_8ng8m"]
+sky_material = SubResource("ProceduralSkyMaterial_xflxs")
+
+[sub_resource type="Environment" id="Environment_4yy1q"]
+background_mode = 2
+sky = SubResource("Sky_8ng8m")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ise75"]
+albedo_color = Color(0, 0.345098, 0, 1)
+
+[sub_resource type="Animation" id="Animation_0gbn6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.60001, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../MeshInstance3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.04368, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8882i"]
+resource_name = "slide"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.60001, 0), Vector3(0, 0.766861, 1.16924)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.3974, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../MeshInstance3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.04368, 0), Vector3(0, 0.00792181, 0.476168)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wmawt"]
+_data = {
+"RESET": SubResource("Animation_0gbn6"),
+"slide": SubResource("Animation_8882i")
+}
+
+[sub_resource type="GDScript" id="GDScript_k4wox"]
+script/source = "extends AnimationPlayer
+var speed
+const WALK_SPEED = 5.0
+const SPRINT_SPEED = 8.0
+const JUMP_VELOCITY = 4.5
+const SENSITIVITY = 0.015
+const SLIDE_SPEED = 15
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = 9.8
+
+# bob variables
+const BOB_FREQ = 2.0
+const BOB_AMP = 0.08
+var t_bob = 0.0
+
+# fov variables
+var fov = 75
+const FOV_CHANGE = 1.5
+
+@onready var head = $Head
+@onready var camera = $Head/Camera3D
+@onready var particles = $particles
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	if Input.is_action_just_pressed(\"slide\") and Input.is_action_pressed(\"sprint\"):
+		play(\"slide\")
+		particles.emitting = true
+	if Input.is_action_just_pressed(\"slide\") and Input.is_action_pressed(\"sprint\") and is_on_floor():
+		speed = SLIDE_SPEED
+	if Input.is_action_just_released(\"slide\"):
+		play(\"RESET\")
+		particles.emitting = false
+		speed = SPRINT_SPEED
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f8v1q"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.8
+emission_ring_inner_radius = 1.5
+direction = Vector3(0, 0, 1)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fndi6"]
+size = Vector3(0.01, 0.01, 15)
+
+[node name="World" type="Node3D"]
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("1_x03fb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04368, 0)
+mesh = SubResource("CapsuleMesh_l0a8v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04368, 0)
+shape = SubResource("ConvexPolygonShape3D_ifwni")
+
+[node name="Head" type="Node3D" parent="Player"]
+transform = Transform3D(1.24903, 0, 0, 0, 1.27065, 0, 0, 0, 1, 0, 1.60001, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head"]
+
+[node name="Map" type="Node3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 21.2698, -14.31)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
+environment = SubResource("Environment_4yy1q")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(1, 2.98023e-08, -1.49012e-08, 2.98023e-08, 1, 0, 0, 2.98023e-08, 1, 0, 0, 0)
+light_color = Color(1, 0.788235, 0.239216, 1)
+shadow_enabled = true
+
+[node name="floor" type="CSGBox3D" parent="Map"]
+transform = Transform3D(-0.866024, 0, -0.500003, -0.433016, 0.499998, 0.749999, 0.250001, 0.866027, -0.43301, -2.53085, -4.23381, -22.0958)
+material_override = SubResource("StandardMaterial3D_ise75")
+use_collision = true
+size = Vector3(20.121, 0.0465088, 22.9883)
+
+[node name="wall1" type="CSGBox3D" parent="Map"]
+transform = Transform3D(0.862912, -1.19502e-06, 0.505356, 0.437652, 0.5, -0.747303, -0.252677, 0.866026, 0.431456, -8.42023, 4.54549, -26.1316)
+use_collision = true
+size = Vector3(20.5762, 1.89166, 0.338867)
+
+[node name="wall2" type="CSGBox3D" parent="Map"]
+transform = Transform3D(0.862912, -1.19502e-06, 0.505356, 0.437652, 0.5, -0.747303, -0.252677, 0.866026, 0.431456, 2.91209, -12.4529, -16.3176)
+use_collision = true
+size = Vector3(20.5762, 1.89166, 0.338867)
+
+[node name="wall3" type="CSGBox3D" parent="Map"]
+transform = Transform3D(-0.497534, -2.05478e-06, 0.867445, 0.751231, 0.499997, 0.430879, -0.433721, 0.866027, -0.248764, 5.91781, 0.501583, -23.7969)
+use_collision = true
+size = Vector3(22.7852, 1.89166, 0.338867)
+
+[node name="wall4" type="CSGBox3D" parent="Map"]
+transform = Transform3D(-0.497534, -2.05478e-06, 0.867445, 0.751231, 0.499997, 0.430879, -0.433721, 0.866027, -0.248764, -11.5387, -8.22678, -18.7576)
+use_collision = true
+size = Vector3(22.7852, 1.89166, 0.338867)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Player/Head")
+libraries = {
+"": SubResource("AnimationLibrary_wmawt")
+}
+script = SubResource("GDScript_k4wox")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.387792, -0.666471)
+emitting = false
+amount = 175
+process_material = SubResource("ParticleProcessMaterial_f8v1q")
+draw_pass_1 = SubResource("BoxMesh_fndi6")
