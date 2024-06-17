@@ -1,0 +1,11 @@
+Model Information:
+* title:	Spider Sentry Bot
+* source:	https://sketchfab.com/3d-models/spider-sentry-bot-d6b6db2b5817425aadfe77fd30525972
+* author:	Orange Olenji (https://sketchfab.com/Orange_Olenji)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Spider Sentry Bot" (https://sketchfab.com/3d-models/spider-sentry-bot-d6b6db2b5817425aadfe77fd30525972) by Orange Olenji (https://sketchfab.com/Orange_Olenji) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
