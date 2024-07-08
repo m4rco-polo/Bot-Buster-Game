@@ -4957,10 +4957,10 @@ use_collision = true
 size = Vector3(29.5342, 1.89166, 0.338867)
 
 [node name="cylinder" type="CSGCylinder3D" parent="Map"]
-transform = Transform3D(0.949763, 0.110842, 0.292686, 0.215657, 0.445954, -0.868687, -0.226811, 0.888166, 0.399647, 2.59389, -3.24568, -22.1682)
+transform = Transform3D(0.804399, 0.0117369, 0.256048, 0.211985, 1.09663, -0.719929, -0.1281, 1.88842, 0.41648, 2.59389, -3.24568, -22.1682)
 use_collision = true
-radius = 1.53353
-height = 0.979316
+radius = 1.6352
+height = 0.663796
 
 [node name="Player" type="CharacterBody3D" parent="."]
 script = ExtResource("2_o6isa")
@@ -4986,7 +4986,7 @@ noise = SubResource("FastNoiseLite_uy0ry")
 transform = Transform3D(-1.24903, 1.09194e-07, -1.30213e-15, 0, 1.51524e-08, 1.27065, 8.74228e-08, 1, -1.19249e-08, 0, -1.60444, 0)
 
 [node name="MP5" parent="Player/Head/Camera3D/WeaponHolder" node_paths=PackedStringArray("target_object", "camera_shake") instance=ExtResource("3_3gqmw")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0392617, -0.300793, -0.23601)
+transform = Transform3D(1, -4.23516e-22, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0392617, -0.300793, -0.23601)
 script = ExtResource("5_f0ox4")
 target_object = NodePath(".")
 recoil_rotation_x = ExtResource("6_xd1r5")
@@ -4995,6 +4995,7 @@ recoil_position_z = ExtResource("6_xd1r5")
 recoil_amplitude = Vector3(0.3, 0.25, 0.075)
 lerp_speed = 5.0
 camera_shake = NodePath("../..")
+camera_shake_amount = 0.2
 
 [node name="AnimationTree" type="AnimationTree" parent="Player/Head/Camera3D/WeaponHolder/MP5"]
 libraries = {

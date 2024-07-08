@@ -4,7 +4,7 @@ var speed
 const WALK_SPEED = 3.8
 const SPRINT_SPEED = 8.0
 const JUMP_VELOCITY = 4.5
-var SENSITIVITY = 0.009
+var SENSITIVITY = 0.008
 const SLIDE_SPEED = 20
 var slide = "slide"
 var RESET = "RESET"
